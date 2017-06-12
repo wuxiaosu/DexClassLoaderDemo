@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">LoginDemo</string>
+
+    <string name="prompt_email">邮箱</string>
+    <string name="prompt_password">密码</string>
+    <string name="action_sign_in">登录</string>
+    <string name="action_sign_in_short">登录</string>
+</resources>
