@@ -34,17 +34,17 @@
 ## 3.调用dex内的方法  
 **logindemo** 主要登录代码
 ```
-    private void attemptLogin() {
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
+private void attemptLogin() {
+    String email = mEmailView.getText().toString();
+    String password = mPasswordView.getText().toString();
 
-        if (email.equals("su@wuxiaosu.com") &&
-                password.equals(EncryptUtils.decrypt("HhLiIBqa/Zk="))) {
-            Toast.makeText(this, "登录失败", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
-        }
+    if (email.equals("su@wuxiaosu.com") &&
+            password.equals(EncryptUtils.decrypt("HhLiIBqa/Zk="))) {
+        Toast.makeText(this, "登录失败", Toast.LENGTH_SHORT).show();
+    } else {
+        Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
     }
+}
 ```
 现在我们需要调用 **EncryptUtils** 类中的方法 **decrypt** 来对字符串 **"HhLiIBqa/Zk="** 进行解密。
 - 首先  
