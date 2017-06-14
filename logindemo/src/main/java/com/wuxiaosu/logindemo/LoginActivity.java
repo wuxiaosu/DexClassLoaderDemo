@@ -42,9 +42,9 @@ public class LoginActivity extends AppCompatActivity {
 
         if (email.equals("su@wuxiaosu.com") &&
                 password.equals(EncryptUtils.decrypt("HhLiIBqa/Zk="))) {
-            Toast.makeText(this, "登录失败", Toast.LENGTH_SHORT).show();
-        } else {
             Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "登录失败", Toast.LENGTH_SHORT).show();
         }
     }
 }
