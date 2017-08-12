@@ -1,6 +1,6 @@
 # DexClassLoaderDemo
 ## 0.0 Dex文件是什么？
-**Dex** 文件本质是一种经过 **Android** 打包工具优化后的 **Class** 文件，是 **Android** 平台上( **Dalvik** 虚拟机)的可执行文件， **Android** 中通过 **DexClassLoader** 类来加载这样特殊的 **Class** 文件。
+**Dex** 文件本质是一种经过 **Android** 打包工具优化后的 **Class** 文件，是 **Android** 平台上( **Dalvik** 虚拟机）的可执行文件， **Android** 中通过 **DexClassLoader** 类来加载这样特殊的 **Class** 文件。
 ## 0.1 为什么要加载其他应用的Dex？
 在进行 **Android** 逆向分析的时候，有时候会碰到一些关键数据需要解密，但在反编译过程中发现解密算法太过复杂，无法或难以直接还原，这时可以尝试通过加载 **Dex** 的方法，直接调用应用内的解密方法来进行解密。  
 ## 1. 获取应用Dex文件  
@@ -88,6 +88,8 @@ DexClassManage.Builder builder = neDexClassManage.Builder(this);
 DexClassManage dexManage;
 builder.setDexName("classes.dex");  // .dex 文件名
 builder.setClassName("com.wuxiaosu.logindemo.util.EncryptUtils");   // 类名
+//builder.setClassInitArgs();   //类实例化参数
+//builder.setClassInitArgTypes();   //实例化参数类型
 builder.setMethod("decrypt", true, String.class); //方法名，是否为静态方法，参数类型...
 builder.setArgs("HhLiIBqa/Zk=");    //参数...
 dexManage = builder.create();

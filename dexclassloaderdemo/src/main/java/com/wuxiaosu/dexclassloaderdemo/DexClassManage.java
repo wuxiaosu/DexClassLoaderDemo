@@ -1,4 +1,4 @@
-package com.wuxiaosu.dexclassloaderdemo;
+package com.wuxiaosu.ciphertools.util;
 
 import android.content.Context;
 
@@ -25,6 +25,8 @@ public class DexClassManage {
     private String mMethodName;
     private Class<?>[] mParameterTypes;
     private Object[] mArgs;
+    private Object[] mInitArgs;
+    private Class<?>[] mInitArgTypes;
     private boolean mIsStatic = false;
 
     private DexClassManage(Context context) {
@@ -45,6 +47,17 @@ public class DexClassManage {
 
         public Builder setClassName(String className) {
             mDexClassManage.mClassName = className;
+            return this;
+        }
+
+        public Builder setClassInitArgs(Object... initArgs) {
+            mDexClassManage.mInitArgs = initArgs;
+            return this;
+
+        }
+
+        public Builder setClassInitArgTypes(Class... parameterTypes) {
+            mDexClassManage.mInitArgTypes = parameterTypes;
             return this;
         }
 
@@ -74,7 +87,6 @@ public class DexClassManage {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public Object invoke() {
@@ -84,8 +96,14 @@ public class DexClassManage {
             classes = mLoader.loadClass(mClassName);
             Object instance = null;
             if (!mIsStatic) {
-                Constructor localConstructor = classes.getConstructor();
-                instance = localConstructor.newInstance();
+                Constructor localConstructor;
+                if (mInitArgTypes != null && mInitArgs != null) {
+                    localConstructor = classes.getConstructor(mInitArgTypes);
+                    instance = localConstructor.newInstance(mInitArgs);
+                } else {
+                    localConstructor = classes.getConstructor();
+                    instance = localConstructor.newInstance();
+                }
             }
             method = classes.getMethod(mMethodName, mParameterTypes);
             return method.invoke(instance, mArgs);
